@@ -14,27 +14,57 @@ document.addEventListener('DOMContentLoaded',function() {
 
     //realizaamos la funcion Validar ok 
         function validar(e) {
-            console.log(e.target.parentElement.nextElementSibling);
+           // console.log(e.target.parentElement.nextElementSibling);
             if(e.target.value.trim() === ''){
                 //console.log('Esta vacio el Campo ');
-                mostrarAlerta(`El campo ${e.target.id}es obligatorio`, e.target.parentElement);   
-            }else{
-                console.log("Ingreso un caracter");
+                mostrarAlerta(`El campo ${e.target.id} es obligatorio`, e.target.parentElement);   
+            return;
             }
+
+            if (e.target.id ==='email' && !validarEmail(e.target.value)) {
+              mostrarAlerta(`El email no es valido`, e.target.parentElement);
+              return;
+            } 
+            limpiarAlerta(e.target.parentElement);
+            //console.log("Despues del IF");
      }
      function mostrarAlerta(mensaje, referencia){
+        //comprueba si ya existe una alerta
+        //const alerta = referencia.querySelector('.bg-red-600');
+        //if(alerta){
+          //  alerta.remove();
+          //ahora solo mandamos llamar la funcion ok 
+          limpiarAlerta(referencia);
+        
+
+
+
+
         //generar alerta en HTML
         const  error = document.createElement('P');
         error.textContent = mensaje;
-        error.classList.add('bg-red-600', 'text-white','p-2','textCenter');
+        error.classList.add('bg-red-600', 'text-white','p-2','text-center');
 
         // console.log(error);
         //inyectar el error al formulario
-        formulario.appendChild(error);
+        //formulario.appendChild(error);
         referencia.appendChild(error);
        // formulario.innerHTML = error.innerHTML;
-
-
      }
 
-});//cierra el principio ok 
+     //creamos la funcion limpiar alerta 
+     function limpiarAlerta(referencia){
+        const alerta = referencia.querySelector('.bg-red-600');
+        if(alerta){
+            alerta.remove();
+        }
+     }
+
+     function validarEmail(email){
+       const regex = /^\W+([.-_+]?\W+)*@\W+([.-]?\W+)*(\.\W{2,10})+$/
+       const resultado = regex.test(email);
+       console.log(resultado);  
+       return resultado;   
+
+      }
+      });//cierra el principio ok 
