@@ -1,17 +1,21 @@
 document.addEventListener('DOMContentLoaded',function() {
-    //selecionar los elementos de la interfaz
+  
+  //selecionar los elementos de la interfaz
     const inputEmail = document.querySelector('#email');
     const inputAsunto = document.querySelector('#asunto');
     const inputMensaje = document.querySelector('#mensaje');
     const formulario = document.querySelector('#formulario');
+
    
 
     //asignar eventos
-    inputEmail.addEventListener('blur',validar);
+    inputEmail.addEventListener('blur',validar);  
     inputMensaje.addEventListener('blur', validar);
     inputAsunto.addEventListener('blur', validar);
     inputEmail.addEventListener('focus', validar);
 
+
+  
     //realizaamos la funcion Validar ok 
         function validar(e) {
            // console.log(e.target.parentElement.nextElementSibling);
@@ -28,6 +32,7 @@ document.addEventListener('DOMContentLoaded',function() {
             limpiarAlerta(e.target.parentElement);
             //console.log("Despues del IF");
      }
+
      function mostrarAlerta(mensaje, referencia){
         //comprueba si ya existe una alerta
         //const alerta = referencia.querySelector('.bg-red-600');
@@ -36,9 +41,6 @@ document.addEventListener('DOMContentLoaded',function() {
           //ahora solo mandamos llamar la funcion ok 
           limpiarAlerta(referencia);
         
-
-
-
 
         //generar alerta en HTML
         const  error = document.createElement('P');
@@ -61,9 +63,10 @@ document.addEventListener('DOMContentLoaded',function() {
      }
 
      function validarEmail(email){
+      //esta es una expresion regular o k ok ok
        const regex = /^\W+([.-_+]?\W+)*@\W+([.-]?\W+)*(\.\W{2,10})+$/
        const resultado = regex.test(email);
-       console.log(resultado);  
+       //console.log(resultado);  
        return resultado;   
 
       }
